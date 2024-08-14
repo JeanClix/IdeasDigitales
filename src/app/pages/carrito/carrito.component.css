@@ -1,0 +1,9 @@
+.icono-eliminar {
+  cursor: pointer;
+}
+.icono-eliminar::before{
+  transition: all 0.25s ease-in-out;
+}
+.icono-eliminar:hover::before {
+  transform: rotate(90deg);
+}

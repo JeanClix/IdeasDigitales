@@ -1,0 +1,59 @@
+<app-page-header title="Pedidos"></app-page-header>
+<section id="proveedores" class="padded">
+  <div class="container">
+    <div class="row justify-content-center mb-3">
+      <div class="col-auto">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" (click)="retroceder()">Anterior</a></li>
+            @for (item of paginas; track item) {
+            <li class="page-item" [class.active]="item === pagina">
+              <a class="page-link" (click)="cambiarPagina(item)">{{item + 1}}</a>
+            </li>
+            }
+            <li class="page-item"><a class="page-link" (click)="avanzar()">Siguiente</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <a>Buscar por:</a>
+    <div class="input-group mb-3">
+      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+        aria-expanded="false">{{tipoBusqueda}} </button>
+      <ul class="dropdown-menu">
+        @for (item of childsPedidio; track $index) {
+        <li><a class="dropdown-item" (click)="getTipo(item)">{{item}} </a></li>
+        }
+      </ul>
+
+      <input type="text" class="form-control" aria-label="Text input with dropdown button" (input)="buscar($event)"
+        placeholder="Indique expresión a buscar">
+    </div>
+    <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <th>Código</th>
+          <th>Fecha Pedido</th>
+          <th>Usuario</th>
+          <th>Nombres</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (pedido of pedidosFiltrados.slice(this.pagina * this.filasPagina, (this.pagina + 1) * this.filasPagina);
+        track pedido.idproveedor) {
+        <tr>
+          <td>{{pedido.idpedido}}</td>
+          <td>{{pedido.fechapedido}}</td>
+          <td>{{pedido.usuario}}</td>
+          <td>{{pedido.nombres}}</td>
+          <td>{{pedido.total}}</td>
+          <td><button class="button btn btn-outline-secondary"
+            routerLink="/pedidosdetalle/{{pedido.idpedido}}" title="Ver detalles del pedido"><i class="bi bi-eye-fill"></i></button> </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

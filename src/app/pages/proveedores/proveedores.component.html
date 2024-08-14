@@ -1,0 +1,89 @@
+<app-page-header title="Proveedores"></app-page-header>
+
+<section id="proveedores" class="padded">
+  <div class="container">
+    <div class="mb-3">
+      <label class="form-label">Buscar</label>
+      <input type="text" class="form-control" placeholder="Indique expresión a buscar" (input)="buscar($event)">
+    </div>
+    <div class=" d-grid justify-content-center">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" (click)="retroceder()">Anterior</a></li>
+        @for (item of paginas; track item) {
+          <li class="page-item" [class.active]="item === pagina">
+            <a class="page-link" (click)="cambiarPagina(item)">{{item+1}}</a>
+          </li>
+        }
+        <li class="page-item"><a class="page-link" (click)="avanzar()">Siguiente</a></li>
+      </ul>
+    </nav>
+    </div>
+
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>Código</th>
+          <th>Empresa</th>
+          <th>Contacto</th>
+          <th>Cargo</th>
+          <th>Ciudad</th>
+          <th>País</th>
+          <th class="text-center"><i class="bi bi-eye-fill"></i></th>
+        </tr>
+      </thead>
+      <tbody>
+
+        @for(proveedor of proveedoresFiltrados.slice(this.pagina*this.filasPagina,(this.pagina+1)*this.filasPagina);
+        track proveedor.idproveedor){
+        <tr>
+          <td>{{ proveedor.idproveedor }}</td>
+          <td>{{ proveedor.nombreempresa }}</td>
+          <td>{{ proveedor.nombrecontacto }}</td>
+          <td>{{ proveedor.cargocontacto }}</td>
+          <td>{{ proveedor.ciudad }}</td>
+          <td>{{ proveedor.pais }}</td>
+          <td><button class="button btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+             title="Ver detalles del proveedor" (click)="verDetalle(proveedor)"><i class="bi bi-eye-fill"></i></button> </td>
+        </tr>
+        }
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      @if(proveedorDetalle!=null){
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Detalle Proveedor:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>ID Proveedor:</strong> {{ proveedorDetalle.idproveedor }}</p>
+        <p><strong>Nombre Empresa:</strong> {{ proveedorDetalle.nombreempresa }}</p>
+        <p><strong>Nombre Contacto:</strong> {{ proveedorDetalle.nombrecontacto }}</p>
+        <p><strong>Cargo Contacto:</strong> {{ proveedorDetalle.cargocontacto }}</p>
+        <p><strong>Dirección:</strong> {{ proveedorDetalle.direccion }}</p>
+        <p><strong>Ciudad:</strong> {{ proveedorDetalle.ciudad }}</p>
+        <p><strong>Región:</strong> {{ proveedorDetalle.region }}</p>
+        <p><strong>Código Postal:</strong> {{ proveedorDetalle.codigopostal }}</p>
+        <p><strong>País:</strong> {{ proveedorDetalle.pais }}</p>
+        <p><strong>Teléfono:</strong> {{ proveedorDetalle.telefono }}</p>
+        <p><strong>Fax:</strong> {{ proveedorDetalle.fax }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    }
+    </div>
+
+  </div>
+</div>
+
+

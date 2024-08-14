@@ -1,0 +1,16 @@
+.list-group-item.active {
+    background-color: var(--color3);
+    border-color: var(--color3);
+}
+.titulo-categoria{
+    padding: 30px 60px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: var(--color-blanco);
+    margin-bottom: 15px;
+}
+
+.list-group-item .badge{
+  right: 10px;
+}

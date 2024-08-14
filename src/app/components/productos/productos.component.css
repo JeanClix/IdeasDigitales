@@ -1,0 +1,56 @@
+.card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-img-top {
+    position: relative;
+    transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+  }
+
+  .precio-original {
+    color: var(--color2);
+    text-decoration: line-through;
+    font-size: 0.9rem;
+  }
+
+  .ocultar {
+    display: none;
+  }
+
+  .porcentaje-descuento {
+    position: absolute;
+    background-color: var(--color4);
+    color: var(--color-blanco);
+    padding: 5px 10px;
+    right: 0;
+  }
+
+  .vista-rapida {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    color: var(--color-blanco);
+    background-color: var(--color-gris-oscuro);
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .card:hover .card-img-top {
+    opacity: 0.5;
+    filter: brightness(0.5);
+  }
+
+  .card:hover .vista-rapida {
+    opacity: 1;
+  }
+  .icono-carrito{
+    cursor: pointer;
+  }
+  .icono-carrito:hover{
+    color: var(--color2);
+  }

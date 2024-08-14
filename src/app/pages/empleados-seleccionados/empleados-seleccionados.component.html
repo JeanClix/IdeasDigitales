@@ -1,0 +1,36 @@
+ <app-page-header title="Empleados Seleccionados: {{seleccionados}}"></app-page-header>
+<section id="empleados-seleccionados" class="padded">
+  <div class="container">
+    <table class="table table-striped">
+      <thead>
+        <tr class="table-dark">
+          <th>Foto</th>
+          <th>Clave</th>
+          <th>Apellido</th>
+          <th>Nombre</th>
+          <th>Usuario</th>
+          <th>Cargo</th>
+          <th>Fecha de Contratación</th>
+          <th>Dirección</th>
+          <th>Teléfono</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (empleado of empleadosSeleccionados; track empleado.idempleado) {
+        <tr>
+          <td><img class="foto" src="{{rutaServicio}}fotos/{{empleado.foto}}"> </td>
+          <td>{{empleado.clave}}</td>
+          <td>{{empleado.apellidos}}</td>
+          <td>{{empleado.nombres}}</td>
+          <td>{{empleado.usuario}}</td>
+          <td>{{empleado.cargo}}</td>
+          <td>{{empleado.fechacontratacion}}</td>
+          <td>{{empleado.direccion}}</td>
+          <td>{{empleado.telefono}}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
+

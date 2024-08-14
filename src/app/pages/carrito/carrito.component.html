@@ -1,0 +1,47 @@
+<app-page-header title="Carrito"></app-page-header>
+<section id="carrito" class="padded">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="text-center">Código</th>
+              <th>Nombre</th>
+              <th class="text-end">Precio</th>
+              <th class="text-end">Cantidad</th>
+              <th class="text-end">Subtotal</th>
+              <th>-</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (itemCarrito of itemsCarrito; track itemCarrito.idproducto; let indice = $index) {
+            <tr>
+              <td class="text-center">{{itemCarrito.idproducto}} </td>
+              <td>{{itemCarrito.nombre}}</td>
+              <td class="text-end">{{itemCarrito.precio | number: '.2'}} </td>
+              <td>
+                <input type="number" value="{{itemCarrito.cantidad}}" min="1" name="" id=""
+                (input)="actualizarCantidad($event, indice)" class="form-control text-end">
+              </td>
+              <td class="text-end">{{itemCarrito.precio * itemCarrito.cantidad | number: '.2'}}</td>
+              <td><i class="bi bi-x-lg icono-eliminar" (click)="eliminarItem(itemCarrito)"></i> </td>
+            </tr>
+            }
+
+          </tbody>
+        </table>
+        <button class="btn btn-danger" (click)="vaciarCarrito()">Vaciar Carrito</button>
+      </div>
+      <div class="col-md-4">
+        <h3>Total</h3>
+        <table class="table">
+          <tbody>
+            <th>Total</th>
+            <td>{{total | number: '.2'}} </td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

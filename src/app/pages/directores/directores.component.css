@@ -1,0 +1,15 @@
+#tabla-directores .bi{
+  cursor: crosshair;
+  opacity: 0;
+  transition: 0.8s;
+}
+#tabla-directores .bi:hover{
+  color: var(--color3);
+  filter: brightness(1.75);
+}
+
+#tabla-directores tr:hover .bi{
+  opacity: 1;
+}
+
+

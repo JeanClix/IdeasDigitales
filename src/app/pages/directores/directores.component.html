@@ -1,0 +1,149 @@
+<app-page-header title="Directores"></app-page-header>
+
+<section id="directores" class="padded">
+    <div class="container">
+        <div class="mb-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertModal">Nuevo director</button>
+        </div>
+
+        <table class="table" id="tabla-directores">
+            <thead class="table-dark">
+                <tr>
+                    <th>Còdigo</th>
+                    <th>Director</th>
+                    <th>Películas</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(director of directores; track director.iddirector){
+                <tr>
+                    <td>{{ director.iddirector }}</td>
+                    <td>{{ director.nombres }}</td>
+                    <td>{{ director.peliculas }}</td>
+                    <td><i class="bi bi-pencil" title="Editar"
+                        data-bs-toggle="modal" data-bs-target="#updateModal"
+                        (click) = "editDirector(director)"></i></td>
+                    <td><i class="bi bi-x-lg" title="Eliminar"
+                        data-bs-toggle="modal" data-bs-target="#deleteModal"
+                        (click) = "deleteDirector(director)"></i></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title fs-5" id="exampleModalLabel">Nuevo director</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form ngNativeValidate [formGroup]="directoresInsertForm"
+                (ngSubmit)="directoresInsert(directoresInsertForm.value)">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <input type="text" class="form-control"
+                            formControlName="nombres"
+                            minlength="5"
+                            maxlength="20"
+                            required
+                            placeholder="Nombre completo">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control"
+                            formControlName="peliculas"
+                            required
+                            placeholder="Películas">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title fs-5" id="exampleModalLabel">Actualizar director</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form ngNativeValidate [formGroup]="directoresUpdateForm"
+                (ngSubmit)="directoresUpdate(directoresUpdateForm.value)" *ngIf="directorActualizar">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <input type="text" class="form-control"
+                            formControlName="iddirector"
+                            [(ngModel)] = "directorActualizar.iddirector"
+                            readonly>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control"
+                            formControlName="nombres"
+                            [(ngModel)] = "directorActualizar.nombres"
+                            minlength="5"
+                            maxlength="20"
+                            required
+                            placeholder="Nombre completo">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control"
+                            formControlName="peliculas"
+                            [(ngModel)] = "directorActualizar.peliculas"
+                            required
+                            placeholder="Películas">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title fs-5" id="exampleModalLabel">Eliminar director</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form ngNativeValidate [formGroup]="directoresUpdateForm"
+                (ngSubmit)="directoresDelete(directoresUpdateForm.value)" *ngIf="directorEliminar">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        ¿Está seguro que desea eliminar al director <strong>{{directorEliminar.nombres}}</strong>?
+
+                        <input type="hidden" class="form-control"
+                            formControlName="iddirector"
+                            [(ngModel)] = "directorEliminar.iddirector">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Eliminar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

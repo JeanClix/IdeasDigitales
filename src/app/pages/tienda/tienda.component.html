@@ -1,0 +1,31 @@
+<app-page-header title="Tienda"></app-page-header>
+<section id="tienda">
+    <div class="container">
+        <div style="background-image: url('{{rutaServicio + categoriaSeleccionada.foto}}');"
+            class="titulo-categoria text-info">
+            <h2>{{categoriaSeleccionada.nombre}}</h2>
+            <p>{{categoriaSeleccionada.descripcion}}</p>
+        </div>
+
+        <div class="row py-3">
+            <div class="col-lg-3 col-md-4 bg-info">
+                <ul class="list-group">
+                    @for (categoria of categorias; track categoria.idcategoria) {
+                    <li class="list-group-item" (click)="seleccionarCategoria(categoria)" style="cursor:pointer"
+                        [class.active]="categoria === categoriaSeleccionada" title={{categoria.descripcion}}>
+                        {{categoria.nombre}}
+
+                        <span class="position-absolute top-50 translate-middle badge rounded-pill bg-danger">
+                            {{categoria.total}}
+                        </span>
+                    </li>
+                    }
+                </ul>
+            </div>
+            <div class="col-lg-9 col-md-8 bg-success">
+                <p class="text-end text-white">Mostrando {{categoriaSeleccionada.total}} resultados</p>
+                <app-productos idcategoria={{categoriaSeleccionada.idcategoria}} />
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,63 @@
+<app-page-header title="{{productoDetalle[0].nombre}}"></app-page-header>
+<section id="empleados" class="padded">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <img src="{{productoDetalle[0].imagengrande == null ? noFoto :
+            rutaServicio + productoDetalle[0].imagengrande}} " class="img-fluid" alt="...">
+      </div>
+      <div class="col">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Precio</th>
+              <td>S/ {{
+                (productoDetalle[0].preciorebajado == "0"
+                ? productoDetalle[0].precio
+                : productoDetalle[0].preciorebajado) | number: '.2'}}
+                <span class="precio-original" [class.ocultar]="productoDetalle[0].preciorebajado==0">
+                  S/{{productoDetalle[0].precio | number: '.2'}} </span>
+              </td>
+            </tr>
+            <tr>
+              <th>Detalle</th>
+              <td>{{productoDetalle[0].detalle}}</td>
+            </tr>
+            <tr>
+              <th>Stock</th>
+              <td>{{productoDetalle[0].unidadesenexistencia}} </td>
+            </tr>
+            <tr>
+              <th>Categoría</th>
+              <td>{{productoDetalle[0].categoria}} </td>
+            </tr>
+            <tr>
+              <th>Proveedor</th>
+              <td>{{productoDetalle[0].proveedor}} </td>
+            </tr>
+            <tr>
+              <th>Pais</th>
+              <td>{{productoDetalle[0].pais}} </td>
+            </tr>
+            <tr>
+              <th>Cantidad</th>
+              <td><input type="number" value="1" min="1" name="" id="" (input)="actualizarCantidad($event)"
+                  class="form-control">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="mb-3 d-grid">
+          <button class="btn btn-primary"
+            (click)="agregarCarrito(productoDetalle[0])"
+          >Añadir al carrito <i class="bi bi-bag-plus"></i> </button>
+        </div>
+        <h3>
+          Descripción:
+        </h3>
+        <div [innerHTML]="productoDetalle[0].descripcion"></div>
+
+      </div>
+    </div>
+  </div>
+</section>

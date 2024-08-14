@@ -1,0 +1,88 @@
+<app-page-header title="Países"></app-page-header>
+@if (showAlert) {
+  <div class="alert alert-success alert-dismissible fade show container my-3" role="alert">
+    ¡Registro exitoso!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+}
+<section id="directores" class="padded">
+  <div class="container">
+    <div class="mb-3">
+      <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#insertModal">Nuevo país</button>
+    </div>
+
+    <table class="table" id="tabla-directores">
+      <thead class="table-dark">
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Capital</th>
+          <th>Área</th>
+          <th>Población</th>
+          <th>Continente</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(pais of paises; track pais.idpais){
+        <tr>
+          <td>{{ pais.codpais }}</td>
+          <td>{{ pais.pais }}</td>
+          <td>{{ pais.capital }}</td>
+          <td>{{ pais.area }}</td>
+          <td>{{ pais.poblacion }}</td>
+          <td>{{ pais.continente}}</td>
+          <!-- <td><i class="bi bi-pencil" title="Editar"
+                        data-bs-toggle="modal" data-bs-target="#updateModal"
+                        (click) = "editDirector(director)"></i></td>
+                    <td><i class="bi bi-x-lg" title="Eliminar"
+                        data-bs-toggle="modal" data-bs-target="#deleteModal"
+                        (click) = "deleteDirector(director)"></i></td> -->
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
+<div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title fs-5" id="exampleModalLabel">Nuevo pais</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form ngNativeValidate [formGroup]="paisesInsertForm" (ngSubmit)="paisesInsert(paisesInsertForm.value)">
+        <div class="modal-body">
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="codigo"  maxlength="20" required
+              placeholder="Código">
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="pais"  maxlength="20" required
+              placeholder="Nombre">
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="capital" required placeholder="Capital">
+          </div>
+          <div class="mb-3">
+            <input type="number" class="form-control" formControlName="area"  maxlength="20" required
+              placeholder="Área">
+          </div>
+          <div class="mb-3">
+            <input type="number" class="form-control" formControlName="poblacion"  maxlength="20" required
+              placeholder="Población">
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="continente" required placeholder="Continente">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

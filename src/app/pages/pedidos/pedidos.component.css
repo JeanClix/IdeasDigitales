@@ -1,0 +1,20 @@
+.page-link {
+  cursor: pointer;
+  color: var(--color-negro)
+}
+.page-link:hover{
+  background-color: var(--color-gris-claro);
+}
+.padded{
+  padding-top: 30px;
+}
+.active > .page-link, .page-link.active {
+  z-index: 3;
+  color: var(--color-blanco);
+  background-color: var(--color-negro);
+  border-color: var(--color-negro);
+}
+.fila-pedido {
+  cursor: pointer;
+}
+

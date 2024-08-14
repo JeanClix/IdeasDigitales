@@ -1,0 +1,29 @@
+<app-page-header title="Empleados"></app-page-header>
+<section id="empleados" class="padded">
+  <div class="container">
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
+      @for (empleado of empleados; track empleado.idempleado) {
+      <div class="col">
+        <div class="card h-100">
+          <img src="{{rutaServicio}}fotos/{{empleado.foto}}" class="card-img-top" alt="Foto de {{empleado.nombres}}">
+          <div class="card-body">
+            <h5 class="card-title">Empleado {{empleado.idempleado}}: {{empleado.nombres}} {{empleado.apellidos}}</h5>
+            <p class="card-text">{{empleado.cargo}}</p>
+          </div>
+          <div class="card-footer bg-dark d-grid justify-content-center text-white">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"
+               [checked]="estaSeleccionado(empleado)"
+              (change)="seleccionarEmpleado(empleado)">
+              <label class="form-check-label">
+                Seleccionar
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>

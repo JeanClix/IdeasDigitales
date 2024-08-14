@@ -1,0 +1,44 @@
+<app-page-header [title]="'Detalles del Pedido ' + idPedido"></app-page-header>
+<section id="pedido-detalle" class="padded" *ngIf="pedidoDetalle.length > 0">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <h2>Pedido #{{idPedido}}</h2>
+      </div>
+      <div class="col-6">
+        <p class="text-end">total de productos: {{cantidad}} </p>
+      </div>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th class="text-center">Código</th>
+          <th>Producto</th>
+          <th>Detalle</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (pedido of pedidoDetalle; track pedido.idproducto) {
+          <tr>
+            <td>
+              <img [src]="pedido.imagenchica ? (rutaServicio + pedido.imagenchica) : noFoto"
+                   class="img-thumbnail" alt="Imagen del producto" style="max-width: 50px;">
+            </td>
+            <td class="text-center">{{pedido.idproducto}}</td>
+            <td>{{pedido.nombre}}</td>
+            <td>{{pedido.detalle}}</td>
+            <td>{{pedido.precio | currency:'USD':'symbol':'1.2-2'}}</td>
+            <td>{{pedido.cantidad}}</td>
+            <td>{{pedido.precio * pedido.cantidad | currency:'USD':'symbol':'1.2-2'}}</td>
+          </tr>
+        }
+      </tbody>
+
+    </table>
+  </div>
+</section>
